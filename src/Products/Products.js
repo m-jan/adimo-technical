@@ -1,20 +1,42 @@
 import React, { Component } from 'react'
 import './Products.css'
 import './ProductCarousel.css'
+import './Basket.css'
+
+
+const BasketTable = (props) => {
+  const rows = Object.values(props.basket).map(product => 
+    <tr>
+      <td className="remove"><button><i className="fas fa-times"></i></button></td>
+      <td className="title">{product.title}</td>
+      <td className="quantity">x{product.quantity}</td>
+      <td className="total-price">£{Number.parseFloat(product.totalPrice).toFixed(2)}</td>
+    </tr>  
+  )
+  return (
+    <table className="basket-table">
+      <tbody>
+        {rows}
+      </tbody>
+    </table>
+  )
+}
 
 const BasketOverlay = (props) => (
   <div className="basket-overlay">
     <button 
       className="back"
       onClick={props.close}>
-        x</button>
-    <h1>Total: £0.00</h1>
+      <i className="fas fa-times"></i>
+    </button>
+    <h1 className="total">Total: £{Number.parseFloat(props.totalPrice).toFixed(2)}</h1>
+    <BasketTable basket={props.basket} />
   </div>
 )
 const Footer = (props) => (
   <footer className="footer">
     <button className="basket" onClick={props.openBasket}>
-       {props.basketSize} items
+      {props.basketSize} items 
       <i className="fas fa-shopping-cart"></i>
     </button>
     
@@ -90,12 +112,23 @@ class Products extends Component {
   handleAddToBasket(){
     const updatedBasket = Object.assign({}, this.state.basket);
     const productTitle = this.state.products[2].title;
+    const productPrice = Number(this.state.products[2].price.slice(1));
+    
+
     if(updatedBasket[productTitle]){
-      updatedBasket[productTitle] += 1;
+      updatedBasket[productTitle].quantity += 1;
+      updatedBasket[productTitle].totalPrice = 
+        updatedBasket[productTitle].quantity * updatedBasket[productTitle].price;
     }
     else {
-      updatedBasket[productTitle] = 1;
+      updatedBasket[productTitle] = {
+        quantity: 1,
+        price: productPrice,
+        totalPrice: productPrice,
+        title: productTitle
+      };
     }
+
 
     this.setState({basket: updatedBasket});
   }
@@ -111,7 +144,20 @@ class Products extends Component {
 
   render(){
     const primary = this.state.products[2] //Primary product will be 3rd in the carousel
-    const basketSize = Object.values(this.state.basket).length ? Object.values(this.state.basket).reduce(sum) : 0
+    //const basketSize = Object.values(this.state.basket).length ? Object.values(this.state.basket).reduce(sum) : 0
+    const basketArray = Object.values(this.state.basket)
+
+    // if(basketArray.length > 0){
+    //   const totalBasketItems = basketArray.map(e => e.quantity).reduce(sum)
+    //   const totalBasketPrice = basketArray.map(e => e.totalPrice).reduce(sum)
+    // } else {
+    //   const totalBasketItems = 0
+    //   const totalBasketPrice = 0
+    // }
+   
+    const totalBasketItems = basketArray.length > 0 ? basketArray.map(e => e.quantity).reduce(sum) : 0
+    const totalBasketPrice = basketArray.length > 0 ? basketArray.map(e => e.totalPrice).reduce(sum) : 0
+
     return (
       <div className="products-container">
         <div className="products">
@@ -137,12 +183,14 @@ class Products extends Component {
           
           <Footer 
             primary={primary}
-            basketSize={basketSize}
+            basketSize={totalBasketItems}
             addToBasket={this.handleAddToBasket}
             openBasket={this.handleOpenOverlay}
           />
           <BasketOverlay 
-            close={this.handleCloseOverlay} />
+            close={this.handleCloseOverlay}
+            totalPrice={totalBasketPrice}
+            basket={this.state.basket} />
         </div>
       </div>
     )
