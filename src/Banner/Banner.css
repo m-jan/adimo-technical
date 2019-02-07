@@ -1,0 +1,25 @@
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 300px;
+  height: 250px;
+}
+
+.banner .banner-img {
+  width: 300px;
+  height: 250px;
+}
+
+.banner .add {
+  position: absolute;
+  z-index: 2;
+  top: 200px;
+  left: 120px;
+  width: 175px;
+  height: 44px;
+  opacity: 0;
+  font-size: 0;
+  border: none;
+}

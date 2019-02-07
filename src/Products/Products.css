@@ -1,0 +1,146 @@
+.products-container {
+  position: fixed;
+  top: 0;
+  left: 300px;
+  z-index: 20;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.products-container.active {
+  transform: translate(-300px, 0);
+  opacity: 1;
+}
+
+.products {
+  width: 300px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.products .price {
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: #999999;
+  margin: 0 0 3px;
+}
+
+.products .product-carousel-container .offer {
+  position: absolute;
+  width: 300px;
+  z-index: 24;
+  background-color: #90232d;
+  color: hsla(0, 0%, 100%, 0.8);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.8em;
+  margin-top: -35px;
+}
+.footer {
+  display: flex;
+  min-height: 30px;
+}
+
+.footer .basket {
+  flex-basis: 33.33%;
+  background-color: #f53447;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.footer .basket .fas {
+  position: fixed;
+  top: 227px;
+  left: 10px;
+}
+
+.footer .add {
+  flex-basis: 33.33%;
+  background-color: #dc1528;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.footer .add .fas {
+  position: fixed;
+  top: 227px;
+  left: 170px;
+}
+
+.footer .next {
+  flex-basis: 33.33%;
+  background-color: #90232d;
+  border: none;
+  cursor: pointer;
+}
+
+.footer .next .retailer-logo {
+  background-image: url("https://s3-eu-west-1.amazonaws.com/retailer-api/retailers/5676e8ec-2571-4444-aaf9-847085ef8aa2_2x.png");
+  filter: brightness(0) invert(1);
+  vertical-align: middle;
+  width: 63px;
+  height: 20px;
+  background-color: transparent;
+  background-position: left top;
+  background-size: 63px auto;
+  display: inline-block;
+  font-size: 0;
+  background-repeat: no-repeat;
+}
+
+.footer .next .fas {
+  display: inline-block;
+  font-size: 16px;
+  color: white;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.header {
+  min-height: 30px;
+  display: flex;
+}
+
+.header .back{
+  color: #999;
+  border: none;
+  background: 0;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.header .title {
+  font-size: 12px;
+  position: absolute;
+  text-align: center;
+  width: 240px;
+  margin-left: 35px;
+  z-index: 24;
+  color: #999999;
+  font-weight: 400;
+}
+
+.basket-overlay {
+  position: fixed;
+  top: 250px;
+  left: 0;
+  height: 250px;
+  width: 300px;
+  z-index: 25;
+  opacity: 0;
+  background-color: white;
+  transition: all 0.5s ease-in-out;
+}
+
+.basket-overlay.active {
+  transform: translate(0, -250px);
+  opacity: 1;
+} 

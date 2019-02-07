@@ -1,0 +1,8 @@
+.mpu {
+  outline: 2px solid #eee;
+  height: 250px;
+  width: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
