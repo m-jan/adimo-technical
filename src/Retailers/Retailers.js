@@ -19,4 +19,4 @@ const Retailers = (props) => (
   </div>
 )
 
-export default Retailers
+export default Retailers  

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import nanoid from 'nanoid'
 import './Products.css'
 import './ProductCarousel.css'
 import './Basket.css'
@@ -6,8 +7,12 @@ import './Basket.css'
 
 const BasketTable = (props) => {
   const rows = Object.values(props.basket).map(product => 
-    <tr>
-      <td className="remove"><button><i className="fas fa-times"></i></button></td>
+    <tr key={nanoid()}>
+      <td className="remove">
+        <button onClick={(e) => props.removeFromBasket(product.title, e)}>
+          <i className="fas fa-times"></i>
+        </button>
+      </td>
       <td className="title">{product.title}</td>
       <td className="quantity">x{product.quantity}</td>
       <td className="total-price">£{Number.parseFloat(product.totalPrice).toFixed(2)}</td>
@@ -30,7 +35,9 @@ const BasketOverlay = (props) => (
       <i className="fas fa-times"></i>
     </button>
     <h1 className="total">Total: £{Number.parseFloat(props.totalPrice).toFixed(2)}</h1>
-    <BasketTable basket={props.basket} />
+    <BasketTable basket={props.basket} 
+      removeFromBasket={props.removeFromBasket}
+    />
   </div>
 )
 const Footer = (props) => (
@@ -85,6 +92,7 @@ class Products extends Component {
     this.handleMoveLeft = this.handleMoveLeft.bind(this);
     this.handleMoveRight = this.handleMoveRight.bind(this);
     this.handleAddToBasket = this.handleAddToBasket.bind(this);
+    this.handleRemoveFromBasket = this.handleRemoveFromBasket.bind(this);
     this.handleOpenOverlay = this.handleOpenOverlay.bind(this);
     this.handleCloseOverlay = this.handleCloseOverlay.bind(this);
   }
@@ -129,7 +137,12 @@ class Products extends Component {
       };
     }
 
+    this.setState({basket: updatedBasket});
+  }
 
+  handleRemoveFromBasket(productTitle, e){
+    const updatedBasket = Object.assign({}, this.state.basket);
+    delete updatedBasket[productTitle];
     this.setState({basket: updatedBasket});
   }
 
@@ -190,7 +203,9 @@ class Products extends Component {
           <BasketOverlay 
             close={this.handleCloseOverlay}
             totalPrice={totalBasketPrice}
-            basket={this.state.basket} />
+            basket={this.state.basket} 
+            removeFromBasket={this.handleRemoveFromBasket}
+            />
         </div>
       </div>
     )

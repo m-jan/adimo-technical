@@ -55,8 +55,8 @@
 
 .footer .basket .fas {
   position: fixed;
-  top: 227px;
-  left: 10px;
+  top: 224px;
+  left: 6px;
 }
 
 .footer .add {
@@ -69,8 +69,8 @@
 
 .footer .add .fas {
   position: fixed;
-  top: 227px;
-  left: 170px;
+  top: 224px;
+  left: 174px;
 }
 
 .footer .next {
@@ -107,16 +107,25 @@
   display: flex;
 }
 
-.header .back{
-  color: #999;
+.header .back {
+  font-size: 0;
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  z-index: 24;
   border: none;
-  background: 0;
-  font-size: 20px;
-  margin-top: 5px;
-  margin-left: 5px;
+  background: 0 0;
+  padding: 0;
   cursor: pointer;
 }
 
+.header .back > .fas {
+  font-size: 20px;
+  color: #999;
+}
 .header .title {
   font-size: 12px;
   position: absolute;

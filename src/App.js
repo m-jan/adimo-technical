@@ -5,13 +5,11 @@ import Retailers from './Retailers/Retailers';
 import Products from './Products/Products';
 
 
-
-
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      products: PRODUCTS 
+      products: PRODUCTS
     }
 
     this.navigateFromBannerToRetailers = this.navigateFromBannerToRetailers.bind(this)
@@ -21,6 +19,15 @@ class App extends Component {
     this.navigateFromProductsToRetailers = this.navigateFromProductsToRetailers.bind(this)
   }
 
+  componentDidMount() {
+    fetch('./data/products.json')
+      .then(response => response.json())
+      .then(result => 
+        this.setState({
+          products: prepareForCarousel(result.products)
+        }))
+      .catch(err => console.log(err));
+  }
   navigateFromBannerToRetailers(){
     document.getElementsByClassName('retailers')[0].classList.add('active');
   }
@@ -84,6 +91,15 @@ const PRODUCTS = [
     'offer': 'Save £0.99'
   }
 ]
+
+/*Carousel needs atleast 5 items */
+function prepareForCarousel(array) {
+  if(array.length >= 5) {
+    return array.slice(0,5)
+  } else {
+    return prepareForCarousel(array.concat(array))
+  }
+}
 
 
 

@@ -17,6 +17,73 @@
 } 
 
 .retailers .heading {
-  font-size: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  width: 75%;
   color: #999999;
+  margin-left: 45px;
+  margin-top: 40px;
+}
+
+.retailers .back {
+  font-size: 0;
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  border: none;
+  background: 0 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.retailers .back > .fas {
+  font-size: 20px;
+  color: #999;
+}
+
+.retailers .retailer-button {
+  margin: 10px 0 0 0;
+  padding: 0;
+  border: 2px solid #f5959e;
+  width: 75px;
+  height: 44px;
+  background-color: #fff;
+  background-size: auto 37px;
+  background-position: center center;
+  position: relative;
+  cursor: pointer;
+  outline: 0;
+}
+
+
+.retailers .retailer-button .retailer-logo {
+  background-image: url("https://s3-eu-west-1.amazonaws.com/retailer-api/retailers/5676e8ec-2571-4444-aaf9-847085ef8aa2_2x.png");
+  vertical-align: middle;
+  width: 63px;
+  height: 20px;
+  background-color: transparent;
+  background-position: left top;
+  background-size: 63px auto;
+  display: inline-block;
+  font-size: 0;
+  background-repeat: no-repeat;
+}
+
+.retailers .account {
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #999999;
+  margin-top: 40px;
+}
+
+.retailers .privacy {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #999;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-top: 0;
 }
